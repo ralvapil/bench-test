@@ -1,10 +1,10 @@
+import React from 'react'
+import { MainView } from './views'
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      App
+    <div>
+      <MainView/>
     </div>
-  );
+  )
 }
-
-export default App;
