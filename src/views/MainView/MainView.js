@@ -1,17 +1,17 @@
-import React from "react";
-import styled from "styled-components";
-import { format } from "date-fns";
+import React from 'react';
+import styled from 'styled-components';
+import { format } from 'date-fns';
 
-import { Header, Body } from "components/layout";
+import { Header, Body } from 'components/layout';
 import {
   Table,
   TableHeader,
   TableHeaderRow,
   TableRow,
   TableData,
-} from "components/table";
+} from 'components/table';
 
-import useMainView from "./useMainView";
+import useMainView from './useMainView';
 
 const LoadingView = styled.div`
   display: flex;
@@ -64,14 +64,14 @@ export default function MainView() {
   const { isLoading, isSuccess, isError, data } = useMainView();
 
   const formatAsCurrency = (amount) =>
-    new Intl.NumberFormat("en-CA", {
-      style: "currency",
-      currency: "CAD",
+    new Intl.NumberFormat('en-CA', {
+      style: 'currency',
+      currency: 'CAD',
     }).format(amount);
 
   const totalSum = isSuccess
     ? formatAsCurrency(data.reduce((acc, cur) => acc + cur.Amount, 0))
-    : "";
+    : '';
 
   /* eslint-disable no-alert, react/no-array-index-key */
   // data is not changed on the page so it is acceptable to use idx as a key
@@ -79,13 +79,13 @@ export default function MainView() {
   const tableRows = isSuccess
     ? data.map((rowData, idx) => (
         <TableRow key={idx}>
-          <TableData>{format(rowData.Date, "MMM do, yyyy")}</TableData>
+          <TableData>{format(rowData.Date, 'MMM do, yyyy')}</TableData>
           <CompanyTableData>{rowData.Company}</CompanyTableData>
           <TableData>{rowData.Ledger}</TableData>
           <AmountTableData>{formatAsCurrency(rowData.Amount)}</AmountTableData>
         </TableRow>
       ))
-    : "";
+    : '';
   /* eslint-enable no-alert, react/no-array-index-key */
 
   return (

@@ -9,10 +9,7 @@ const StyledData = styled.td`
   border: none;
   font-weight: 500;
   color: #acacac;
-
-  &:not(:first-child) {
-    border-top: 1px solid #eaeaea;
-  }
+  border-top: 1px solid #eaeaea;
 `;
 
 export default function TableData({ children, className }) {
