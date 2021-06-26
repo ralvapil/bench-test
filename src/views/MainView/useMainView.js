@@ -1,5 +1,5 @@
-import { parse, isAfter } from "date-fns";
-import { useTransaction, useTransactions } from "hooks/transaction";
+import { parse, isAfter } from 'date-fns';
+import { useTransaction, useTransactions } from 'hooks/transaction';
 
 function getRemainingPages(totalCount) {
   if (!totalCount) {
@@ -20,7 +20,7 @@ function getRemainingPages(totalCount) {
   return pageList;
 }
 
-function mergeTransactionList(pg1Data, queries) {
+function mergeTransactionLists(pg1Data, queries) {
   const transactions = [];
 
   if (pg1Data?.isSuccess) {
@@ -38,7 +38,7 @@ function processTransactionsData(transactions) {
   return transactions
     .map((transaction) => ({
       ...transaction,
-      Date: parse(transaction.Date, "yyyy-MM-dd", new Date()),
+      Date: parse(transaction.Date, 'yyyy-MM-dd', new Date()),
       Amount: parseFloat(transaction.Amount, 10),
     }))
     .sort((a, b) => (isAfter(b.Date, a.Date) ? 1 : -1));
@@ -49,6 +49,7 @@ function queriesIsSuccess(queries) {
 }
 
 export default function useMainView() {
+  // start with page 1 of transactions to find out how many other api calls are required
   const {
     data: pg1Data,
     isSuccess: pg1IsSuccess,
@@ -59,16 +60,17 @@ export default function useMainView() {
   const remainingPages = getRemainingPages(pg1Data?.totalCount);
   const remainingTransactionsQueries = useTransactions(remainingPages);
 
-  const paginatedTransactions =
-    pg1IsSuccess &&
-    queriesIsSuccess(remainingTransactionsQueries) &&
-    mergeTransactionList(pg1Data, remainingTransactionsQueries);
+  let paginatedTransactions = [];
+  let transactions = [];
 
-  // if all queries are successful then process into one flat transaction list
-  const transactions =
-    pg1IsSuccess && queriesIsSuccess(remainingTransactionsQueries)
-      ? processTransactionsData(paginatedTransactions.flat())
-      : [];
+  if (pg1IsSuccess && queriesIsSuccess(remainingTransactionsQueries)) {
+    paginatedTransactions = mergeTransactionLists(
+      pg1Data,
+      remainingTransactionsQueries
+    );
+
+    transactions = processTransactionsData(paginatedTransactions.flat());
+  }
 
   return {
     isLoading:
