@@ -1,10 +1,20 @@
-import React from 'react';
-import { MainView } from './views';
+import React from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+import { MainView } from "./views";
 
 export default function App() {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
+
   return (
-    <div>
+    <QueryClientProvider client={queryClient}>
       <MainView />
-    </div>
+    </QueryClientProvider>
   );
 }
