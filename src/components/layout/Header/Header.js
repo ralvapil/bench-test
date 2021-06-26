@@ -10,6 +10,6 @@ const StyledHeader = styled.header`
   color: #f3f3f3;
 `;
 
-export default function Header({ children }) {
-  return <StyledHeader>{children}</StyledHeader>;
+export default function Header({ children, className }) {
+  return <StyledHeader className={className}>{children}</StyledHeader>;
 }

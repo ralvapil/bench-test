@@ -5,6 +5,6 @@ const StyledBody = styled.div`
   padding: 2rem;
 `;
 
-export default function Body({ children }) {
-  return <StyledBody>{children}</StyledBody>;
+export default function Body({ children, className }) {
+  return <StyledBody className={className}>{children}</StyledBody>;
 }
