@@ -14,6 +14,9 @@
 # production
 /build
 
+# swap files
+*.swp
+
 # misc
 .DS_Store
 .env.local
