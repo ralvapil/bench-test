@@ -1,12 +1,5 @@
-import { parse, isAfter } from 'date-fns';
-import { useTransaction, useTransactions } from 'hooks/transaction';
-
-function formatAmount(amount) {
-  return new Intl.NumberFormat('en-CA', {
-    style: 'currency',
-    currency: 'CAD',
-  }).format(parseFloat(amount, 10));
-}
+import { parse, isAfter } from "date-fns";
+import { useTransaction, useTransactions } from "hooks/transaction";
 
 function getRemainingPages(totalCount) {
   const count = totalCount || 0;
@@ -39,8 +32,8 @@ function processTransactionsData(transactions) {
   return transactions
     .map((transaction) => ({
       ...transaction,
-      Date: parse(transaction.Date, 'yyyy-MM-dd', new Date()),
-      Amount: formatAmount(transaction.Amount),
+      Date: parse(transaction.Date, "yyyy-MM-dd", new Date()),
+      Amount: parseFloat(transaction.Amount, 10),
     }))
     .sort((a, b) => (isAfter(b.Date, a.Date) ? 1 : -1));
 }
@@ -48,7 +41,7 @@ function processTransactionsData(transactions) {
 export default function useMainView() {
   const {
     data: page1Data,
-    isSuccess: page1IsSuccessful,
+    isSuccess: page1IsSuccess,
     isLoading: page1IsLoading,
   } = useTransaction(1);
 
@@ -60,8 +53,9 @@ export default function useMainView() {
     remainingTransactionsQueries
   );
 
+  // if all queries are successful then process transaction data
   const data =
-    page1IsSuccessful &&
+    page1IsSuccess &&
     remainingTransactionsQueries
       .map((query) => query.isSuccess)
       .every((isSuccess) => isSuccess === true) &&
@@ -71,6 +65,9 @@ export default function useMainView() {
     isLoading:
       page1IsLoading ||
       remainingTransactionsQueries.some((query) => query.isLoading),
+    isSuccess:
+      page1IsSuccess &&
+      remainingTransactionsQueries.every((query) => query.isSuccess),
     data,
   };
 }
