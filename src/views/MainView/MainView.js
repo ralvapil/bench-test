@@ -1,9 +1,9 @@
 // package imports
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 // project imports
-import { Header, Body } from '../../components';
+import { Header, Body } from "components/layout";
 
 // page container
 const Container = styled.div`
