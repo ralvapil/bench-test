@@ -8,6 +8,7 @@ export default function App() {
     defaultOptions: {
       queries: {
         refetchOnWindowFocus: false,
+        retry: 0,
       },
     },
   });
