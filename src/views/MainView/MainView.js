@@ -1,9 +1,10 @@
 // package imports
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 // project imports
-import { Header, Body } from "components/layout";
+import { Header, Body } from 'components/layout';
+import useMainView from './useMainView';
 
 // page container
 const Container = styled.div`
@@ -12,10 +13,12 @@ const Container = styled.div`
 `;
 
 export default function MainView() {
+  const { isLoading } = useMainView();
+
   return (
     <Container>
       <Header>Bench Test</Header>
-      <Body>Body Placeholder</Body>
+      <Body>{isLoading ? <div>loading...</div> : <div>Placeholder</div>}</Body>
     </Container>
   );
 }
