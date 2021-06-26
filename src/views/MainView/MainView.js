@@ -16,6 +16,15 @@ import {
 // hooks
 import useMainView from './useMainView';
 
+const LoadingView = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  height: calc(100vh - 80px - 4rem);
+`;
+
 const Container = styled.div`
   background-color: #efede8;
   height: 100vh;
@@ -58,7 +67,7 @@ export default function MainView() {
       <Header>Bench Test</Header>
       <Body>
         {isLoading ? (
-          <div>loading...</div>
+          <LoadingView>Loading...</LoadingView>
         ) : (
           <Table>
             <thead>
