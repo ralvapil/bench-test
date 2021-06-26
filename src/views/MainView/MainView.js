@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { format } from 'date-fns';
 
 import { Header, Body } from 'components/layout';
@@ -10,55 +9,18 @@ import {
   TableRow,
   TableData,
 } from 'components/table';
+import {
+  LoadingView,
+  Emoji,
+  ErrorText,
+  ErrorMessage,
+  Container,
+  SumTableHeader,
+  CompanyTableData,
+  AmountTableData,
+} from './style';
 
 import useMainView from './useMainView';
-
-const LoadingView = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  font-weight: 500;
-  height: calc(100vh - 80px - 4rem);
-`;
-
-const Emoji = styled.span`
-  font-size: 6rem;
-`;
-
-const ErrorText = styled.span`
-  font-size: 1.2rem;
-  font-weight: 700;
-`;
-
-const ErrorMessage = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-`;
-
-const Container = styled.div`
-  background-color: #efede8;
-  min-height: 100vh;
-`;
-
-const SumTableHeader = styled(TableHeader)`
-  &:last-child {
-    text-align: right;
-  }
-`;
-
-const CompanyTableData = styled(TableData)`
-  font-weight: 700;
-  color: black;
-`;
-
-const AmountTableData = styled(TableData)`
-  font-weight: 700;
-  color: black;
-  text-align: right;
-`;
 
 export default function MainView() {
   const { isLoading, isSuccess, isError, data } = useMainView();
