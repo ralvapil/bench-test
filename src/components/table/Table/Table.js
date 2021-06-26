@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const StyledTable = styled.table`
   width: 100%;
   border-collapse: collapse;
-  box-shadow: 2px 4px 2px #d4d4d4;
+  box-shadow: 0px 2px 4px #d9d9d9;
 `;
 
 export default function Table({ children, className }) {
