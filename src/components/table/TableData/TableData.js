@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const StyledData = styled.td`
   text-align: left;
@@ -7,6 +7,8 @@ const StyledData = styled.td`
   background-color: #fafafa;
   font-size: 14px;
   border: none;
+  font-weight: 500;
+  color: #acacac;
 
   &:not(:first-child) {
     border-top: 1px solid #eaeaea;

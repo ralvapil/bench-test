@@ -27,11 +27,24 @@ const LoadingView = styled.div`
 
 const Container = styled.div`
   background-color: #efede8;
-  height: 100vh;
+  min-height: 100vh;
+`;
+
+const SumTableHeader = styled(TableHeader)`
+  &:last-child {
+    text-align: right;
+  }
 `;
 
 const CompanyTableData = styled(TableData)`
   font-weight: 700;
+  color: black;
+`;
+
+const AmountTableData = styled(TableData)`
+  font-weight: 700;
+  color: black;
+  text-align: right;
 `;
 
 export default function MainView() {
@@ -56,7 +69,7 @@ export default function MainView() {
           <TableData>{format(rowData.Date, 'MMM do, yyyy')}</TableData>
           <CompanyTableData>{rowData.Company}</CompanyTableData>
           <TableData>{rowData.Ledger}</TableData>
-          <TableData>{formatAsCurrency(rowData.Amount)}</TableData>
+          <AmountTableData>{formatAsCurrency(rowData.Amount)}</AmountTableData>
         </TableRow>
       ))
     : '';
@@ -75,7 +88,7 @@ export default function MainView() {
                 <TableHeader>Date</TableHeader>
                 <TableHeader>Company</TableHeader>
                 <TableHeader>Account</TableHeader>
-                <TableHeader>{totalSum}</TableHeader>
+                <SumTableHeader>{totalSum}</SumTableHeader>
               </TableHeaderRow>
             </thead>
             <tbody>{tableRows}</tbody>

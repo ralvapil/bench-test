@@ -1,12 +1,12 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const StyledHeader = styled.th`
   text-align: left;
   border: none;
   padding: 1rem 2rem;
   color: #0fb4b5;
-  font-size: 16px;
+  font-size: 18px;
   border-radius: 4px;
 `;
 
